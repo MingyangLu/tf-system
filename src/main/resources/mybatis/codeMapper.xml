@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.alex.tfsystem.code.dao.CodeDAO">
+    <resultMap id="codeMap" type="com.alex.tfsystem.code.bean.CodeItem">
+        <result column="index" property="index" jdbcType="VARCHAR"/>
+        <result column="label" property="label" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getCodeList" parameterType="com.alex.tfsystem.code.bean.Code" resultMap="codeMap">
+        select `index`,label from tf_std_code t where t.codename=#{codeName};
+    </select>
+</mapper>

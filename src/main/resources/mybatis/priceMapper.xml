@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.alex.tfsystem.price.dao.PriceDAO">
+    <resultMap id="priceMap" type="com.alex.tfsystem.price.bean.Price">
+        <result column="jobtype" property="jobtype" jdbcType="VARCHAR"/>
+        <result column="isurgent" property="isurgent" jdbcType="VARCHAR"/>
+        <result column="grade" property="grade" jdbcType="VARCHAR"/>
+        <result column="target" property="target" jdbcType="VARCHAR"/>
+        <result column="price_cny" property="price_cny" jdbcType="VARCHAR"/>
+        <result column="price_gbd" property="price_gbd" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getPrice" parameterType="com.alex.tfsystem.price.bean.Price" resultMap="priceMap">
+        select * from tf_par_price t
+          where t.jobtype=#{jobtype}
+            and t.isurgent=#{isurgent}
+            and t.grade=#{grade}
+            and t.target=#{target}
+    </select>
+</mapper>
