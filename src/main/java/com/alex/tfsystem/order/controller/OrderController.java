@@ -12,9 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,7 +31,7 @@ public class OrderController {
     @Resource
     private IOrderService orderService;
 
-    @RequestMapping(value = "/createOrder")
+    @RequestMapping(value = "/createOrder", method = RequestMethod.POST)
     public ResponseVO createOrder(@RequestBody Order order){
         ResponseVO responseVO = new ResponseVO();
         //短信发送
@@ -50,22 +52,29 @@ public class OrderController {
         order.setUpdatetime(new Date());
         try {
             orderService.createOrder(order);
-            msgFactory.sendMsgToStaff(order);
+
         } catch (Exception e){
             logger.error(e.getMessage());
             responseVO.setResponseCode(ResponseState.ERROR.getCode());
             responseVO.setResponseMsg(e.getMessage());
             return responseVO;
         }
+        try {
+            msgFactory.sendMsgToStaff(order);
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }
+
         return responseVO;
     }
 
-    @RequestMapping(value = "/getOrderList")
+    @RequestMapping(value = "/getOrderList", method = RequestMethod.POST)
     public ResponseVO getOrderList(@RequestBody Order order){
         ResponseVO responseVO = new ResponseVO();
         List<Order> orderList;
-        List<OrderPo> orderListPo = new ArrayList<OrderPo>();
-        if (order.getDeadlineRange() != null || order.getDeadlineRange().isEmpty()){
+        List<OrderPo> orderListPo = new ArrayList<>();
+        if (order.getDeadlineRange() != null && !order.getDeadlineRange().isEmpty()){
             order.setDeadlineRangeStart(order.getDeadlineRange().get(0));
             order.setDeadlineRangeEnd(order.getDeadlineRange().get(1));
         }

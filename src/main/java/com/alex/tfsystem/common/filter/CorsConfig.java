@@ -1,4 +1,4 @@
-package com.alex.tfsystem.common;
+package com.alex.tfsystem.common.filter;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

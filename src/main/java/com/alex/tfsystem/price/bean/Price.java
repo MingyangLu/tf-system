@@ -1,5 +1,7 @@
 package com.alex.tfsystem.price.bean;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -7,13 +9,25 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@ApiModel("价格实体类")
 public class Price implements Serializable {
     private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "作业类型", required = true)
     private String jobtype;
+
+    @ApiModelProperty(value = "是否紧急", required = true)
     private String isurgent;
+
+    @ApiModelProperty(value = "年级", required = true)
     private String grade;
+
+    @ApiModelProperty(value = "目标分数", required = true)
     private String target;
+
+    @ApiModelProperty(value = "价格（人民币）")
     private String price_cny;
+
+    @ApiModelProperty(value = "价格（英镑）")
     private String price_gbd;
 
     public String getJobtype() {
