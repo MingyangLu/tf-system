@@ -15,3 +15,19 @@ CY教育网后台代码，与[tf-web](https://github.com/MingyangLu/tf-web)搭�
 - 订单创建
 - 价格计算
 - 短信提醒
+
+## Version
+- 0.0.1
+    - 项目框架搭建
+    - mybatis连接mysql数据库
+    - redis连接
+    
+- 0.0.2
+    - 增加价格计算功能
+    - 增加订单管理功能
+    - 增加短信提醒功能
+    
+- 0.0.3
+    - 集成swagger2.9.2
+    - 集成
+    

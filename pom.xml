@@ -44,13 +44,13 @@
 
         <!--集成redis-->
         <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-redis</artifactId>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-redis</artifactId>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>org.springframework.cloud</groupId>-->
-            <!--<artifactId>spring-cloud-config-server</artifactId>-->
+        <!--<groupId>org.springframework.cloud</groupId>-->
+        <!--<artifactId>spring-cloud-config-server</artifactId>-->
         <!--</dependency>-->
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
@@ -58,7 +58,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.16</version>
         </dependency>
-
 
 
         <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
@@ -82,9 +81,9 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>com.aliyun</groupId>-->
-            <!--<artifactId>aliyun-java-sdk-core</artifactId>-->
-            <!--<version>4.5.3</version>-->
+        <!--<groupId>com.aliyun</groupId>-->
+        <!--<artifactId>aliyun-java-sdk-core</artifactId>-->
+        <!--<version>4.5.3</version>-->
         <!--</dependency>-->
 
         <!--短信-->
@@ -102,7 +101,7 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        <!--   在线文档     -->
+        <!--   在线文档swagger   -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -113,9 +112,6 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
         </dependency>
-
-
-
 
 
     </dependencies>
