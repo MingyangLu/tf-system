@@ -7,6 +7,9 @@ import com.alex.tfsystem.common.constant.ResponseState;
 import com.alex.tfsystem.order.bean.Order;
 import com.alex.tfsystem.order.bean.OrderPo;
 import com.alex.tfsystem.order.service.IOrderService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import io.netty.util.internal.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -72,30 +75,19 @@ public class OrderController {
     @RequestMapping(value = "/getOrderList", method = RequestMethod.POST)
     public ResponseVO getOrderList(@RequestBody Order order){
         ResponseVO responseVO = new ResponseVO();
-        List<Order> orderList;
-        List<OrderPo> orderListPo = new ArrayList<>();
+        List<OrderPo> orderListPo;
         if (order.getDeadlineRange() != null && !order.getDeadlineRange().isEmpty()){
             order.setDeadlineRangeStart(order.getDeadlineRange().get(0));
             order.setDeadlineRangeEnd(order.getDeadlineRange().get(1));
         }
         try{
-            orderList = orderService.getOrderList(order);
-            // 对orderList的数据类型格式化
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-           for(Order orderFm: orderList){
-               OrderPo orderPo = new OrderPo();
-               BeanUtils.copyProperties(orderFm,orderPo);
-               String createtime = simpleDateFormat.format(orderFm.getCreatetime());
-               String updatetime = simpleDateFormat.format(orderFm.getUpdatetime());
-               String deadline = simpleDateFormat.format(orderFm.getDeadline());
-               orderPo.setCreatetime(createtime);
-               orderPo.setUpdatetime(updatetime);
-               orderPo.setDeadline(deadline);
-               orderListPo.add(orderPo);
-           }
-            responseVO.setData(orderListPo);
+            PageHelper.startPage(order.getPageNum(), order.getPageSize());
+            orderListPo = orderService.getOrderList(order);
+            Page listWithPage = (Page) orderListPo;
+            responseVO.setData(listWithPage);
             return  responseVO;
         }catch (Exception e){
+            e.printStackTrace();
             responseVO.setResponseCode(ResponseState.ERROR.getCode());
             responseVO.setResponseMsg(e.getMessage());
             return responseVO;

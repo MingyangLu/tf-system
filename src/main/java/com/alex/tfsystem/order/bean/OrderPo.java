@@ -2,10 +2,14 @@ package com.alex.tfsystem.order.bean;
 
 import com.alex.tfsystem.common.BaseBean;
 import com.alex.tfsystem.common.BasePo;
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
-public class OrderPo extends BasePo {
+public class OrderPo extends BasePo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // 订单流水号
@@ -21,7 +25,8 @@ public class OrderPo extends BasePo {
     private String jobtype;
     private String grade;
     private String target;
-    private String deadline;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date deadline;
     private List<String> deadlineRange;
     private String deadlineRangeStart;
     private String deadlineRangeEnd;
@@ -100,11 +105,11 @@ public class OrderPo extends BasePo {
         this.target = target;
     }
 
-    public String getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 

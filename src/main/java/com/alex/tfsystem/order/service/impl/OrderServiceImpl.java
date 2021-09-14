@@ -1,6 +1,7 @@
 package com.alex.tfsystem.order.service.impl;
 
 import com.alex.tfsystem.order.bean.Order;
+import com.alex.tfsystem.order.bean.OrderPo;
 import com.alex.tfsystem.order.dao.OrderDAO;
 import com.alex.tfsystem.order.service.IOrderService;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public List<Order> getOrderList(Order order) {
+    public List<OrderPo> getOrderList(Order order) {
         try{
             return this.orderDAO.getOrderList(order);
         }catch (Exception e){
